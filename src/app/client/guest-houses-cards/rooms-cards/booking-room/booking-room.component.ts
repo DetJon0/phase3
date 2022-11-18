@@ -36,9 +36,6 @@ export class BookingRoomComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.roomData);
-    // console.log(JSON.stringify(this.today));
-
     this.isLoading = true;
     this.userService.getRoomBookedDates(this.roomData.id).subscribe({
       next: (bookedDates) => {
@@ -54,16 +51,8 @@ export class BookingRoomComponent implements OnInit {
 
     this.bookingForm = new FormGroup(
       {
-        'check-in': new FormControl(null, [
-          Validators.required,
-          // this.isInThePast.bind(this),
-          // this.isCheckoutBeforeValidator.bind(this),
-        ]),
-        'check-out': new FormControl(null, [
-          Validators.required,
-          // this.isInThePast.bind(this),
-          // this.isCheckoutBeforeValidator.bind(this),
-        ]),
+        'check-in': new FormControl(null, [Validators.required]),
+        'check-out': new FormControl(null, [Validators.required]),
       },
       [
         this.isCheckoutBeforeValidator.bind(this),
@@ -73,8 +62,6 @@ export class BookingRoomComponent implements OnInit {
   }
 
   isInThePast(control: FormControl): { [s: string]: boolean } {
-    //datepicker didn't allow to select dates before today
-    //throws error bsDate: {minDate : {dataMinimum}}
     if (new Date(control.value).getDate() < this.today.getDate()) {
       return { inThePast: true };
     }
@@ -85,32 +72,14 @@ export class BookingRoomComponent implements OnInit {
    *
    * @returns true if checkout is before checkin, false if is later than checkin
    */
-  // isCheckoutBefore(): boolean {
-  //   const dayBefore =
-  //     this.bookingForm.get('check-in') &&
-  //     new Date(this.bookingForm.get('check-in').value);
-
-  //   const dayAfter =
-  //     this.bookingForm.get('check-out') &&
-  //     new Date(this.bookingForm.get('check-out').value);
-
-  //   dayBefore.setHours(0, 0, 0, 0);
-  //   dayAfter.setHours(0, 0, 0, 0);
-
-  //   return dayAfter < dayBefore;
-  // }
   isCheckoutBeforeValidator(): { [s: string]: boolean } {
     if (
       this.bookingForm?.get('check-in')?.value &&
       this.bookingForm?.get('check-out')?.value
     ) {
-      const dayBefore =
-        // this.bookingForm.get('check-in') &&
-        new Date(this.bookingForm.get('check-in').value);
+      const dayBefore = new Date(this.bookingForm.get('check-in').value);
 
-      const dayAfter =
-        // this.bookingForm.get('check-out') &&
-        new Date(this.bookingForm.get('check-out').value);
+      const dayAfter = new Date(this.bookingForm.get('check-out').value);
 
       dayBefore.setHours(0, 0, 0, 0);
       dayAfter.setHours(0, 0, 0, 0);
@@ -123,8 +92,6 @@ export class BookingRoomComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.bookingForm);
-
     if (!this.bookingForm.valid) {
       this.bookingForm.markAllAsTouched();
       return;
@@ -135,12 +102,8 @@ export class BookingRoomComponent implements OnInit {
       roomId: this.roomData.id,
       bookFrom: new Date(this.bookingForm.value['check-in']),
       bookTo: new Date(this.bookingForm.value['check-out']),
+      room: this.roomData, // e kishte shtu backu sepse nuk ishte
     };
-
-    // if (!this.canSelectThatRange(bookingData.bookFrom, bookingData.bookTo)) {
-    //   // this.isRangeForbidden = true;
-    //   return;
-    // }
 
     this.isLoading = true;
     this.userService.bookRoom(bookingData).subscribe({
@@ -155,7 +118,6 @@ export class BookingRoomComponent implements OnInit {
           'en-US'
         )}-${formatDate(bookingData.bookTo, 'dd/MM/yyyy', 'en-US')}.`;
         setInterval(() => this.activeModal.close(), 2000);
-        // console.log(res);
       },
       error: (error) => {
         this.isLoading = false;
@@ -165,26 +127,6 @@ export class BookingRoomComponent implements OnInit {
     });
   }
 
-  // canSelectThatRange(dStart: Date, dEnd: Date) {
-  //   //kontrollo nese nje date eshte ne kete interval ose JO
-  //   //cdo date qe kemi ne kete range i bejme nje kontroll me indexOF .... nese gjej nje i bie jo
-  //   //DUHET PROVU NESE PUNON
-  //   for (
-  //     let dTemp = dStart;
-  //     dTemp.getDate() <= dEnd.getDate();
-  //     dTemp.setDate(dTemp.getDate() + 1)
-  //   ) {
-  //     for (let i = 0; i < this.bookedDates.length; i++) {
-  //       if (
-  //         formatDate(this.bookedDates[i], 'dd/MM/yyyy', 'en-US') ===
-  //         formatDate(dTemp, 'dd/MM/yyyy', 'en-US')
-  //       ) {
-  //         return false;
-  //       }
-  //     }
-  //   }
-  //   return true;
-  // }
   rangeForbidden() {
     if (
       !this.bookingForm?.get('check-in')?.value ||

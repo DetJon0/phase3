@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GuestHouse } from 'src/app/shared/guestHouse.model';
 import { ghWithImg, UserService } from '../user.service';
 
 @Component({
@@ -22,19 +21,8 @@ export class GuestHousesCardsComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute
   ) {}
-  // ngAfterViewInit(): void {
-  //   window.scrollTo({
-  //     top: 0,
-  //     left: 0,
-  //     behavior: 'smooth',
-  //   });
-  // }
 
   ngOnInit(): void {
-    // this.checkIn = this.route.snapshot.queryParams.checkIn;
-    // this.checkOut = this.route.snapshot.queryParams.checkOut;
-    // this.numBeds = this.route.snapshot.queryParams.numBeds;
-
     this.route.queryParams.subscribe((qParams) => {
       this.checkIn = new Date(qParams['checkIn']);
       this.checkOut = new Date(qParams['checkOut']);
@@ -42,8 +30,6 @@ export class GuestHousesCardsComponent implements OnInit {
 
       this.isLoading = true;
       if (this.checkIn && this.checkOut && this.numBeds) {
-        // console.log('search Mode....');
-        // console.log(this.userService.dateFormat(this.checkIn));
         this.userService
           .getSearchGuestHouse(this.checkIn, this.checkOut, this.numBeds)
           .subscribe({
@@ -73,29 +59,5 @@ export class GuestHousesCardsComponent implements OnInit {
         });
       }
     });
-
-    // console.log(
-    //   this.checkIn instanceof Date,
-    //   this.checkOut ? true : false,
-    //   this.numBeds
-    // );
-    // if (this.checkIn && this.checkOut && this.numBeds) {
-    //   console.log('search Mode....');
-    //   this.guestHouses = [];
-    // } else {
-    //   this.userService.getAllGuestHouses().subscribe((ghs) => {
-    //     this.guestHouses = ghs;
-    //   });
-    // }
   }
-
-  //mund te kalojme te gjithe guestHousin me ane te routert me dinamyc data...
-  // onViewDetails(gh:GuestHouse){
-  //   this.router.navigate([''], {data:})
-  // }
-
-  /**
-   *
-   * duhet te shtohet logjika per afishimin e search-it
-   */
 }

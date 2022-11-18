@@ -57,17 +57,10 @@ export class UserService {
   ): Observable<ghWithImg[]> {
     let newParams = new HttpParams();
 
-    // newParams = newParams.append('checkIn', Date.parse(checkIn.toString()));
-    // newParams = newParams.append('checkOut', checkOut.toString());
-    // newParams = newParams.append('checkIn', this.dateFormat(checkIn));
-    // newParams = newParams.append('checkOut', this.dateFormat(checkOut));
-
     newParams = newParams.append('checkIn', checkIn.toJSON());
     newParams = newParams.append('checkOut', checkOut.toJSON());
 
     newParams = newParams.append('numberOfBeds', numberOfBeds);
-
-    // console.log(newParams, checkIn instanceof Date, checkOut, numberOfBeds);
 
     return this.http
       .get<GuestHouse[]>(environment.API_CALLS_LINK + '/GuestHouse', {
@@ -83,29 +76,6 @@ export class UserService {
           });
         })
       );
-  }
-  dateFormat(date: Date): string {
-    //2022-11-04T10:10:42.562Z
-    // console.log(
-    //   `${date.getFullYear()}-${this.make2digit(
-    //     date.getMonth() + 1
-    //   )}-${this.make2digit(date.getDate())}T${this.make2digit(
-    //     date.getHours()
-    //   )}:${this.make2digit(date.getMinutes())}:${this.make2digit(
-    //     date.getSeconds()
-    //   )}.${date.getMilliseconds()}Z`
-    // );
-
-    return `${date.getFullYear()}-${this.make2digit(
-      date.getMonth() + 1
-    )}-${this.make2digit(date.getDate())}T${this.make2digit(
-      date.getHours()
-    )}:${this.make2digit(date.getMinutes())}:${this.make2digit(
-      date.getSeconds()
-    )}.${date.getMilliseconds()}Z`;
-  }
-  make2digit(num: number) {
-    return num <= 9 ? '0' + num : '' + num;
   }
 
   /**
@@ -151,23 +121,12 @@ export class UserService {
 
   /**
    * @param id-user id
-   * @return user data- username,email,firstName, LastName, phoneNumber
+   * @return user all user-data
    */
   getUserData(id: string): Observable<UserDataResponse> {
     return this.http.get<UserDataResponse>(
       environment.API_CALLS_LINK + '/Users/' + id
     );
-    // .pipe(
-    //   map((user) => {
-    //     return {
-    //       username: user.userName,
-    //       email: user.email,
-    //       firstName: user.firstName,
-    //       lastName: user.lastName,
-    //       phoneNumber: user.phoneNumber,
-    //     };
-    //   })
-    // );
   }
 
   editUser(userData: UserDataResponse): Observable<UserDataResponse> {
@@ -203,7 +162,6 @@ export class UserService {
   }
 
   private daysBetween(d1: Date, d2: Date): Date[] {
-    // console.log(d1);
     const dateArr: Date[] = [];
     for (
       let date = d1;
@@ -214,24 +172,6 @@ export class UserService {
     }
     return dateArr;
   }
-
-  //---
-
-  // getUsers(): Observable<UserData> {
-  //   return this.http
-  //     .get<UserDataResponse>(environment.API_CALLS_LINK + '/Users')
-  //     .pipe(
-  //       map((user) => {
-  //         return {
-  //           username: user.userName,
-  //           email: user.email,
-  //           firstName: user.firstName,
-  //           lastName: user.lastName,
-  //           phoneNumber: user.phoneNumber,
-  //         };
-  //       })
-  //     );
-  // }
 
   getUsers(): Observable<UserData[]> {
     return this.http
@@ -258,11 +198,6 @@ export class UserService {
     numberOfBeds: number
   ): Observable<Room[]> {
     let newParams = new HttpParams();
-
-    // newParams = newParams.append('checkIn', Date.parse(checkIn.toString()));
-    // newParams = newParams.append('checkOut', checkOut.toString());
-    // newParams = newParams.append('checkIn', this.dateFormat(checkIn));
-    // newParams = newParams.append('checkOut', this.dateFormat(checkOut));
 
     newParams = newParams.append('checkIn', checkIn.toJSON());
     newParams = newParams.append('checkOut', checkOut.toJSON());

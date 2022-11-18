@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ClientRoleGuard } from '../auth/client-role.guard';
 import { GuestHousesCardsComponent } from './guest-houses-cards/guest-houses-cards.component';
-import { BookingRoomComponent } from './guest-houses-cards/rooms-cards/booking-room/booking-room.component';
 import { RoomsCardsComponent } from './guest-houses-cards/rooms-cards/rooms-cards.component';
 import { ClientComponent } from './client.component';
 import { ClientMainPageComponent } from './client-main-page/client-main-page.component';
@@ -24,15 +23,10 @@ const routes: Routes = [
         component: RoomsCardsComponent,
       },
       {
-        //do bohet me modal, dhe si rrjedhoje sdo na duhet kjo route
-        path: 'guestHousesCards/roomsCards/:id/:name/roomDetails/:id',
-        component: BookingRoomComponent,
-      },
-      {
         path: 'userPanel',
         component: UserPanelComponent,
         children: [
-          { path: '', component: UserProfileComponent }, //by default te hap profilin e userit
+          { path: '', component: UserProfileComponent }, //by default opens user profile
           { path: 'bookings', component: UserBookingsComponent },
         ],
       },

@@ -31,8 +31,6 @@ export class ClientMainPageComponent implements OnInit {
       next: (ghData) => {
         this.isLoading = false;
         this.guestHouses = ghData;
-        // console.log(ghData);
-        // this.guestHouses = ghData;
       },
       error: (error) => {
         this.isLoading = false;
@@ -54,17 +52,6 @@ export class ClientMainPageComponent implements OnInit {
     );
   }
 
-  // isCheckoutBefore(): boolean {
-  //   const dayBefore =
-  //     this.searchRooms.get('check-in') &&
-  //     new Date(this.searchRooms.get('check-in').value);
-
-  //   const dayAfter =
-  //     this.searchRooms.get('check-out') &&
-  //     new Date(this.searchRooms.get('check-out').value);
-
-  //   return dayAfter < dayBefore;
-  // }
   isCheckoutBeforeValidator(): { [s: string]: boolean } {
     if (
       this.searchRooms?.get('check-in')?.value &&
@@ -89,14 +76,11 @@ export class ClientMainPageComponent implements OnInit {
   }
 
   onSearch() {
-    // console.log(this.searchRooms);
-
     if (!this.searchRooms.valid) {
       this.searchRooms.markAllAsTouched();
       return;
     }
-    const vlera = this.searchRooms.value['check-in']; //kthen nje objekt, sikur data
-    // console.log(vlera instanceof Date);
+    const vlera = this.searchRooms.value['check-in'];
 
     this.router.navigate(['/client/guestHousesCards'], {
       queryParams: {

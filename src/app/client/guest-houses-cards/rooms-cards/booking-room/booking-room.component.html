@@ -1,7 +1,4 @@
-<!-- modal i cili ka infot dhe nje date picker me datat qe jane te zena disabled
-nr e personve -->
 <div class="p-3">
-  <!-- <div class="d-flex justify-content-between"> -->
   <div class="modal-header pb-3">
     <h4>Booking "{{ this.roomData.name }}"</h4>
     <button
@@ -11,7 +8,6 @@ nr e personve -->
       (click)="activeModal.close()"
     ></button>
   </div>
-  <!-- </div> -->
 
   <div class="modal-body">
     <div class="text-center"><app-loading *ngIf="isLoading"></app-loading></div>
@@ -27,7 +23,6 @@ nr e personve -->
       [formGroup]="this.bookingForm"
       (ngSubmit)="onSubmit()"
     >
-      <!-- <div class="row justify-content-between p-4"> -->
       <div class="py-3">
         <label for="check-in" class="form-label pb-1">Check In:</label>
         <input
@@ -111,10 +106,7 @@ nr e personve -->
         </span>
       </div>
 
-      <!-- </div> -->
-      <!-- </div> -->
       <div class="modal-footer pt-3">
-        <!-- <div class="text-end"> -->
         <button
           type="submit"
           ngbAutofocus
@@ -129,7 +121,6 @@ nr e personve -->
         >
           Close
         </button>
-        <!-- </div> -->
       </div>
     </form>
   </div>

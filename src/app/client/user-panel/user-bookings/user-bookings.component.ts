@@ -34,7 +34,7 @@ export class UserBookingsComponent implements OnInit {
     const searchVal = event.target['value'];
     this.filteredBookingsData = this.bookingsData.filter((el) => {
       return (
-        el.roomId.toString().includes(searchVal) ||
+        el.room.name.toLowerCase().includes(searchVal) ||
         formatDate(el.bookTo, 'd/M/yyyy', 'en-US').includes(searchVal) ||
         formatDate(el.bookFrom, 'd/M/yyyy', 'en-US').includes(searchVal)
       );

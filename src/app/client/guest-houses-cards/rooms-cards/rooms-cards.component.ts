@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faBed, faDollar, faStar } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -52,12 +52,10 @@ export class RoomsCardsComponent implements OnInit {
           .getSearchRooms(this.ghId, this.checkIn, this.checkOut, this.numBeds)
           .subscribe({
             next: (rooms) => {
-              // console.log(rooms);
               this.isLoading = false;
               this.rooms = rooms;
             },
             error: (error) => {
-              // console.log(error);
               this.isLoading = false;
               this.errorMessage =
                 'An error accrued while fetching data. PLease try again later.';
@@ -66,12 +64,10 @@ export class RoomsCardsComponent implements OnInit {
       } else {
         this.adminRoomsService.getRooms(this.ghId).subscribe({
           next: (rooms) => {
-            // console.log(rooms);
             this.isLoading = false;
             this.rooms = rooms;
           },
           error: (error) => {
-            // console.log(error);
             this.isLoading = false;
             this.errorMessage =
               'An error accrued while fetching data. PLease try again later.';
@@ -80,17 +76,8 @@ export class RoomsCardsComponent implements OnInit {
       }
     });
   }
-  // ngAfterViewInit(): void {
-  //   window.scrollTo({
-  //     top: 0,
-  //     left: 0,
-  //     behavior: 'smooth',
-  //   });
-  // }
 
   onBookRoom(roomData: Room) {
-    // duhet nje modal qe hap details per dhomen, dhe formen per me marr rezervimin
-    //duhet dhoma si parameter
     this.modalRef = this.modalService.open(BookingRoomComponent, {
       centered: true,
       backdrop: 'static',
