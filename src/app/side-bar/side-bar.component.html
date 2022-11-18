@@ -1,0 +1,31 @@
+<div class="">
+  <header
+    class="d-flex p-3 flex-wrap justify-content-center align-items-center"
+  >
+    <img class="circle-3" src="../../assets/photos/logo.jpg" alt="logo" />
+    <h2 class="ps-1">Business</h2>
+  </header>
+  <hr />
+  <div>
+    <p class="d-flex align-items-center justify-content-center p-2 mt-3 bold">
+      Dashboard
+      <fa-icon [icon]="faHouse" class="px-1"></fa-icon>
+    </p>
+    <nav>
+      <ul class="listNone p-0">
+        <a routerLink="/admin/guestHouse" class="anchorNone aHover">
+          <li class="d-flex align-items-center justify-content-between p-2 li">
+            Guest House
+            <fa-icon [icon]="faBuildingUser"></fa-icon>
+          </li>
+        </a>
+        <a routerLink="/admin/users" class="anchorNone aHover">
+          <li class="d-flex align-items-center justify-content-between p-2 li">
+            Users
+            <fa-icon [icon]="faUsers"></fa-icon>
+          </li>
+        </a>
+      </ul>
+    </nav>
+  </div>
+</div>

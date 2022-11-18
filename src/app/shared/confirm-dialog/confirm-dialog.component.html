@@ -1,0 +1,13 @@
+<div class="p-4">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal(false)"></button>
+  </div>
+  <div class="modal-body py-2">
+    <p>{{ message }}</p>
+  </div>
+  <div class="modal-footer pt-2">
+    <button type="button" class="btn btn-outline-danger py-1 px-2 me-2" (click)="onCloseModal(true)">Yes</button>
+    <button type="button" ngbAutofocus class="btn btn-outline-success py-1 px-2" (click)="onCloseModal(false)">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<!-- te gjithe te dhenat e booking nga ky client -->
+<div class="table-cli-border p-3 pt-4 scroll">
+  <div class="row grey2 p-2">
+    <div class="col align-self-center">
+      <h5>Manage Bookings</h5>
+    </div>
+    <div class="col text-end">
+      <input
+        type="text"
+        class="search-box grey px-3 py-2"
+        placeholder="Search..."
+        (input)="onSearch($event)"
+      />
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <table class="table" *ngIf="this.bookingsData?.length; else nothing">
+        <thead>
+          <tr>
+            <th class="pt-3 pb-1 col-5 col-md-4 col-xl-3">Room name</th>
+            <th class="pt-3 pb-1 col">From</th>
+            <th class="pt-3 pb-1 col-2">To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bookData of filteredBookingsData">
+            <td class="py-3 pe-2 pe-md-0">{{ bookData.roomId }}</td>
+            <td class="py-3 pe-2 pe-md-0">
+              {{ bookData.bookFrom | date: "d/M/yyyy" }}
+            </td>
+            <td class="py-3">{{ bookData.bookTo | date: "d/M/yyyy" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #nothing>
+        <div>
+          <h6 class="text-center py-3">You haven't done any bookings.</h6>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

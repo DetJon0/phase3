@@ -1,0 +1,81 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light client-bg-color py-3 ps-4 nav-b-border"
+>
+  <div class="container-fluid">
+    <h2>
+      <a class="anchor-none text-dark" routerLink="/client">
+        <img class="circle-3" src="../../assets/photos/logo.jpg" />
+        Business
+      </a>
+    </h2>
+    <button
+      class="navbar-toggler px-2 py-1 me-3"
+      type="button"
+      (click)="this.openCollapse = !this.openCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      [ngClass]="{ collapse: !this.openCollapse }"
+      [ngClass]="{ show: this.openCollapse }"
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav mx-auto my-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link clickAble ps-3 ps-lg-0 nav-element"
+            aria-current="page"
+            routerLink="/client"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item ps-3 ps-lg-4 nav-element">
+          <a
+            class="nav-link clickAble"
+            routerLink="/client/guestHousesCards"
+            routerLinkActive="active"
+            >Guest Houses</a
+          >
+        </li>
+        <li class="nav-item ps-3 ps-lg-4 nav-element">
+          <a
+            class="nav-link clickAble"
+            routerLink="/client"
+            fragment="about-section"
+            >About Us</a
+          >
+        </li>
+        <li class="nav-item ps-3 ps-lg-4 nav-element">
+          <a
+            class="nav-link clickAble"
+            routerLink="/client"
+            fragment="contact-section"
+            >Contact Us</a
+          >
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <a
+          class="navbar-brand ps-1 ms-auto ms-lg-0"
+          routerLink="/client/userPanel"
+        >
+          <fa-icon [icon]="faUser"></fa-icon>{{ username | titlecase }}</a
+        >
+
+        <button
+          class="btn-none px-3"
+          title="logOut"
+          (click)="onLogoutUser()"
+          type="button"
+          tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+          placement="bottom"
+        >
+          <fa-icon [icon]="faRightFromBracket"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

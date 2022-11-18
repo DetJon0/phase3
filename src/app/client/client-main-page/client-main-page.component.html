@@ -1,0 +1,174 @@
+<!-- 5 guesthouset me te marra me qera -->
+<div class="row">
+  <div class="col pt-4">
+    <!-- loading / error -->
+    <div class="text-center"><app-loading *ngIf="isLoading"></app-loading></div>
+    <app-error
+      [errorMsg]="errorMessage"
+      [isError]="true"
+      (remove)="errorMessage = null"
+      *ngIf="errorMessage"
+    ></app-error>
+
+    <section *ngIf="!isLoading && !errorMessage" class="relative">
+      <carousel>
+        <slide *ngFor="let gh of guestHouses">
+          <img
+            [src]="'../../assets/photos/' + gh.img"
+            class="w100 carousel-img"
+          />
+          <div class="carousel-caption d-none d-md-block bg-custom">
+            <h3>{{ gh.name | uppercase }}</h3>
+            <p>{{ gh.description }}</p>
+          </div>
+        </slide>
+      </carousel>
+      <a
+        class="btn btn-light buton-zIndex-1100"
+        routerLink="/client/guestHousesCards"
+      >
+        Watch all
+      </a>
+    </section>
+  </div>
+</div>
+
+<form [formGroup]="this.searchRooms" (ngSubmit)="onSearch()">
+  <div class="row justify-content-between p-4 bg-search-rooms">
+    <div class="col col-md-3">
+      <label for="check-in" class="form-label pb-1">Check In:</label>
+      <input
+        autocomplete="off"
+        type="text"
+        id="check-in"
+        formControlName="check-in"
+        placeholder="mm/dd/yyyy"
+        class="form-control py-1 px-2 redBorder"
+        bsDatepicker
+        [minDate]="today"
+        [bsConfig]="bsConfig"
+      />
+      <div
+        *ngIf="
+          !this.searchRooms.get('check-in').valid &&
+          this.searchRooms.get('check-in').touched
+        "
+      >
+        <p
+          *ngIf="this.searchRooms.get('check-in').errors.required"
+          class="invalid-data"
+        >
+          *This field is required
+        </p>
+        <p
+          class="invalid-data"
+          *ngIf="this.searchRooms.get('check-in').errors.bsDate?.minDate"
+        >
+          Please select a valid date (not the past)
+        </p>
+      </div>
+    </div>
+    <div class="col px-2 px-md-0 col-md-3">
+      <label for="check-out" class="form-label pb-1">Check Out:</label>
+      <input
+        autocomplete="off"
+        type="text"
+        id="check-out"
+        formControlName="check-out"
+        placeholder="mm/dd/yyyy"
+        class="form-control py-1 px-2 redBorder"
+        bsDatepicker
+        [minDate]="today"
+        [bsConfig]="bsConfig"
+      />
+      <div
+        *ngIf="
+          !this.searchRooms.get('check-out').valid &&
+          this.searchRooms.get('check-out').touched
+        "
+      >
+        <p
+          *ngIf="this.searchRooms.get('check-out').errors.required"
+          class="invalid-data"
+        >
+          *This field is required
+        </p>
+        <p
+          class="invalid-data"
+          *ngIf="this.searchRooms.get('check-out').errors.bsDate?.minDate"
+        >
+          Please select a valid date (not the past)
+        </p>
+      </div>
+      <div
+        class="invalid-data"
+        *ngIf="
+          this.searchRooms.invalid && this.searchRooms.errors?.checkOutBefore
+        "
+      >
+        Please select a check-out later or equal than check-in
+      </div>
+    </div>
+    <div class="col col-md-2">
+      <label for="num-beds" class="form-label pb-1">Beds:</label>
+      <input
+        type="number"
+        min="1"
+        class="form-control py-1 px-2 redBorder"
+        formControlName="num-beds"
+        id="num-beds"
+      />
+      <div
+        *ngIf="
+          !this.searchRooms.get('num-beds').valid &&
+          this.searchRooms.get('num-beds').touched
+        "
+      >
+        <p
+          *ngIf="this.searchRooms.get('num-beds').errors.required"
+          class="invalid-data"
+        >
+          *This field is required
+        </p>
+        <p
+          *ngIf="this.searchRooms.get('num-beds').errors.min"
+          class="invalid-data"
+        >
+          Number of beds should be at least 1.
+        </p>
+      </div>
+    </div>
+    <div class="col-12 pt-2 pt-md-0 col-md-2">
+      <button type="submit" class="btn btn-primary py-1 py-md-0 w-100 h-100">
+        Search
+      </button>
+    </div>
+    <!-- </div> -->
+  </div>
+</form>
+
+<section class="row py-5" id="about-section">
+  <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+    <img
+      src="../../../assets/photos/f1.jpg"
+      class="img-responsive img-mainpage shadow-con"
+      alt="fotoDhome"
+    />
+  </div>
+  <div
+    class="col-12 col-md-6 mt-5 mt-md-0 d-flex flex-column justify-content-center"
+  >
+    <h2 class="pb-3 text-center">Welcome to our great Business</h2>
+    <p class="px-1 pb-2">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut labore, non
+      delectus temporibus architecto veritatis laborum provident molestias unde
+      similique quasi omnis possimus, vitae assumenda, quisquam quod laudantium
+      rerum fugit!
+    </p>
+    <p class="px-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nobis
+      repellendus asperiores, delectus exercitationem recusandae numquam nulla
+      voluptatem!
+    </p>
+  </div>
+</section>

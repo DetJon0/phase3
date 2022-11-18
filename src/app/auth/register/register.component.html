@@ -1,0 +1,99 @@
+<div class="fluid-container d-flex full-height grey">
+    <div class="col-10 col-sm-8 col-md-6 col-xl-4 mx-auto align-self-center bg-white p-5 round-border shadow-con">
+        <div class="text-center"><app-loading *ngIf="isLoading" ></app-loading></div>
+        <app-error
+        [errorMsg]="errorMsg"
+        [isError]="isError"
+        (remove)="errorMsg = null"
+        *ngIf="errorMsg"></app-error>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+            <div class="form-group py-2">
+                <label for="username">Username</label>
+                <input type="text"
+                id="username"
+                class="form-control py-1 redBorder"
+                formControlName="username">
+                <span *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched"
+                class="form-text text-muted">
+                  <span *ngIf="registerForm.get('username').errors.required">This field is required.</span>
+                  <span *ngIf="registerForm.get('username').errors.pattern">Only characters allowed (3+).</span>
+                </span>
+            </div>
+            <div class="form-group py-2">
+                <label for="firstName">First Name</label>
+                <input type="text"
+                id="firstName"
+                class="form-control py-1 redBorder"
+                formControlName="firstName">
+                <span *ngIf="!registerForm.get('firstName').valid && registerForm.get('firstName').touched"
+                class="form-text text-muted">
+                  <span *ngIf="registerForm.get('firstName').errors.required">This field is required.</span>
+                  <span *ngIf="registerForm.get('firstName').errors.pattern">Only characters allowed (min 3+).</span>
+                </span>
+            </div>
+            <div class="form-group py-2">
+                <label for="lastName">Last Name</label>
+                <input type="text"
+                id="lastName"
+                class="form-control py-1 redBorder"
+                formControlName="lastName">
+                <span *ngIf="!registerForm.get('lastName').valid && registerForm.get('lastName').touched"
+                class="form-text text-muted">
+                  <span *ngIf="registerForm.get('lastName').errors.required">This field is required.</span>
+                  <span *ngIf="registerForm.get('lastName').errors.pattern">Only characters allowed (min 3+).</span>
+                </span>
+            </div>
+
+            <div class="form-group py-2">
+                <label for="email">Email</label>
+                <input class="form-control py-1 redBorder"
+                id="email"
+                type="text"
+                formControlName="email"
+                >
+                <span *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched" class="form-text text-muted">
+                  <span *ngIf="registerForm.get('email').errors.required">This field is required.</span>
+                  <span *ngIf="registerForm.get('email').errors.email">Email format : someone@something.something</span>
+                </span>
+            </div>
+            <div class="form-group py-2">
+                <label for="pass">Password</label>
+                <input class="form-control py-1 redBorder"
+                id="pass"
+                type="password"
+                formControlName="password"
+                pattern = "(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"
+                >
+                <span *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched"
+                class="form-text text-muted">
+                  <span *ngIf="registerForm.get('password').errors.required">This field is required.</span>
+                  <span *ngIf="registerForm.get('password').errors.pattern">Should include one Uppercase, lowercase, number and special character. Length 6-10</span>
+                </span>
+            </div>
+
+            <div class="form-group py-2">
+                <label for="phoneNum">Phone Number</label>
+                <input type="text"
+                id="phoneNum"
+                class="form-control py-1 redBorder"
+                formControlName="phoneNumber">
+                <span *ngIf="!registerForm.get('phoneNumber').valid && registerForm.get('phoneNumber').touched"
+                class="form-text text-muted">
+                  <span *ngIf="registerForm.get('phoneNumber').errors.required">This field is required.</span>
+                  <span *ngIf="registerForm.get('phoneNumber').errors.pattern">Format: +0123456789</span>
+                </span>
+            </div>
+
+
+            <div class="text-end py-2">
+                <button class="btn btn-primary mx-3 px-3 py-1"
+                type="submit"
+                >Register</button>
+                <button class="btn btn-outline-secondary px-3 py-1"
+                type="button"
+                (click)="reset()"
+                >Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

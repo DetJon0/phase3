@@ -1,0 +1,191 @@
+<!-- grid me rooms per ate gh me nje button book -->
+<div class="container mx-auto">
+  <h2 class="text-center pt-4">Welcome inside "{{ ghName }}"</h2>
+
+  <!-- <div class="grid-container py-4 px-1"> -->
+  <div>
+    <div class="text-center"><app-loading *ngIf="isLoading"></app-loading></div>
+    <app-error
+      [errorMsg]="errorMessage"
+      [isError]="true"
+      (remove)="errorMessage = null"
+      *ngIf="errorMessage"
+    ></app-error>
+  </div>
+  <div
+    class="row-size-equal"
+    *ngIf="!isLoading && !errorMessage && this.rooms?.length"
+  >
+    <div
+      class="row py-3 border-bottom align-items-center"
+      *ngFor="let room of this.rooms"
+    >
+      <div class="col-12 col-lg-6 p-3 text-center">
+        <img
+          [src]="'data:image/jpeg;base64,' + room.image"
+          class="w-100 round-border max-w-550"
+          alt="..."
+        />
+      </div>
+      <div
+        class="col-12 col-lg-6 ps-5 align-self-center text-center text-lg-start"
+      >
+        <h5 class="py-2">{{ room.name | uppercase }}</h5>
+        <p class="card-text">
+          {{ room.description | uppercase }}
+        </p>
+        <p class="py-3">
+          <span class="inline-space text-center">
+            <fa-icon [icon]="faBed"></fa-icon> </span
+          >Number Of Beds : {{ room.numberOfBeds }}<br />
+          <span class="inline-space text-center">
+            <fa-icon [icon]="faDollar"></fa-icon> </span
+          >Price : ${{ room.price }}<span class="sideText">/ night</span>
+        </p>
+        <div>
+          <p>
+            <span class="inline-space text-center"
+              ><fa-icon [icon]="faStar"></fa-icon></span
+            >Amenities:
+          </p>
+          <span class="ps-3" *ngFor="let anim of room.amenities">
+            {{ anim | displayAmenities }}
+          </span>
+        </div>
+        <div class="pt-2">
+          <button
+            class="btn btn-primary round-border px-3 py-1"
+            (click)="onBookRoom(room)"
+          >
+            Book
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-3" *ngIf="!isLoading && !errorMessage && !this.rooms?.length">
+    <h6 class="text-center">No rooms available.</h6>
+  </div>
+</div>
+<!-- kto jane kot me pa si duket -->
+<!-- <div class="row py-3 border-bottom">
+  <div class="col-12 col-lg-6 p-3">
+    <img
+      src="../../../assets/photos/f1.jpg"
+      class="w-100 round-border"
+      alt="..."
+    />
+  </div>
+  <div class="col-12 col-lg-6 ps-5 align-self-center">
+    <h5 class="py-2">{{ "Emri Dhomes" | uppercase }}</h5>
+    <p class="py-2 card-text">
+      {{ "Pershkrimi Dhomes" | uppercase }}
+    </p>
+    <p>{{ "num beds" }}</p>
+    <p>23<span class="sideText">/ night</span></p>
+    <div class="pt-2">
+      <button
+        class="btn btn-primary round-border px-3 py-1"
+        (click)="onBookRoom({})"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="card animation">
+    <img src="../../../assets/photos/f1.jpg" class="card-img-top" alt="..." />
+    <div
+      class="card-body px-3 py-2 d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <h5 class="card-title">{{ "Emri Dhomes" | uppercase }}</h5>
+        <p class="card-text py-2 card-text">
+          23<span class="sideText">/ night</span>
+        </p>
+      </div>
+      <div class="">
+        <button class="btn btn-primary px-2 py-1" (click)="onBookRoom()">
+          Book
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card animation">
+    <img src="../../../assets/photos/f1.jpg" class="card-img-top" alt="..." />
+    <div
+      class="card-body px-3 py-2 d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <h5 class="card-title">{{ "Emri Dhomes" | uppercase }}</h5>
+        <p class="card-text py-2 card-text">
+          23<span class="sideText">/ night</span>
+        </p>
+      </div>
+      <div class="">
+        <button class="btn btn-primary px-2 py-1" (click)="onBookRoom()">
+          Book
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card animation">
+    <img src="../../../assets/photos/f1.jpg" class="card-img-top" alt="..." />
+    <div
+      class="card-body px-3 py-2 d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <h5 class="card-title">{{ "Emri Dhomes" | uppercase }}</h5>
+        <p class="card-text py-2 card-text">
+          23<span class="sideText">/ night</span>
+        </p>
+      </div>
+      <div class="">
+        <button class="btn btn-primary px-2 py-1" (click)="onBookRoom()">
+          Book
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card animation">
+    <img src="../../../assets/photos/f1.jpg" class="card-img-top" alt="..." />
+    <div
+      class="card-body px-3 py-2 d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <h5 class="card-title">{{ "Emri Dhomes" | uppercase }}</h5>
+        <p class="card-text py-2 card-text">
+          23<span class="sideText">/ night</span>
+        </p>
+      </div>
+      <div class="">
+        <button class="btn btn-primary px-2 py-1" (click)="onBookRoom()">
+          Book
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card animation">
+    <img src="../../../assets/photos/f1.jpg" class="card-img-top" alt="..." />
+    <div class="card-body px-3 py-2">
+      <h5 class="card-title">{{ "Emri Dhomes" | uppercase }}</h5>
+      <p class="card-text py-2 card-text">
+        23<span class="sideText">/ night</span>
+      </p>
+      <button class="btn btn-primary px-2 py-1">Book</button>
+    </div>
+  </div>
+  <div class="card animation">
+    <img src="../../../assets/photos/f1.jpg" class="card-img-top" alt="..." />
+    <div class="card-body px-3 py-2">
+      <h5 class="card-title">{{ "Emri Dhomes" | uppercase }}</h5>
+      <p class="card-text py-2 card-text">
+        23<span class="sideText">/ night</span>
+      </p>
+      <button class="btn btn-primary px-2 py-1">Book</button>
+    </div>
+  </div>
+</div> -->

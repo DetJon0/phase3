@@ -1,0 +1,76 @@
+<div class=" bg-white m-3 p-2">
+  <div class="row grey2 m-2">
+    <div class="col p-3">
+      <button class="btn btn-success px-2 py-1" (click)="onNewGuestHouse()" >
+          <fa-icon [icon]="faPlus"></fa-icon>
+          New Guest House
+      </button>
+    </div>
+  </div>
+
+  <div class="row grey2 p-2 mx-2 mt-3">
+    <div class="col d-flex justify-content-between align-items-center flex-wrap">
+      <b>Manage Guest Rooms</b>
+      <div class="">
+        <input
+        type="text"
+        class="search-box grey px-3 py-2"
+        (input)="filterGuestHouses(searchInput.value)"
+        placeholder="Search..."
+        #searchInput>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-2">
+    <div
+    *ngIf = 'isLoading'
+    class="text-center" >
+      <app-loading></app-loading>
+    </div>
+
+    <div
+    *ngIf = '!isLoading'
+    class="col table-responsive-md">
+    <app-error
+    [errorMsg]="errorMsg"
+    isError="true"
+    (remove)="onRemoveError()"
+    *ngIf="errorMsg"></app-error>
+        <table *ngIf="!errorMsg" class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let guestH of filteredGuestHouses; let i = index">
+                <th  class="py-3 align-middle" scope="row">{{ i+1 }}</th>
+                <td class="py-3 align-middle">{{ guestH.name }}</td>
+                <td class="py-3 align-middle" >{{ guestH.description }}</td>
+                <td class="py-3 w-25 align-middle" >
+
+                  <button class="btn btn-success p-2 circle" (click)="onNewGuestHouse(guestH)" title="edit">
+                    <fa-icon [icon]="faPencil" fixedWidth="1.6rem"></fa-icon>
+                  </button>
+
+                  <button class="btn btn-danger p-2 circle mx-1" (click)="onDeleteGH(guestH)" title="delete">
+                    <fa-icon [icon]="faTrashCan" fixedWidth="1.6rem"></fa-icon>
+                  </button>
+
+                  <button class="btn btn-primary p-2 circle" (click)='goToRooms(guestH)' title="room list">
+                    <fa-icon [icon]="faHouse" fixedWidth="1.6rem"></fa-icon>
+                  </button>
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>

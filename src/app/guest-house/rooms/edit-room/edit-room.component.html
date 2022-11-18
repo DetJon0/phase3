@@ -1,0 +1,171 @@
+<div class="container p-4">
+  <div class="modal-header pb-2">
+    <h4 class="modal-title">{{ roomData ? "Edit Room" : "Create Room" }}</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="onHideForm()"
+    ></button>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center py-2">
+    <app-loading></app-loading>
+  </div>
+
+  <div class="modal-body" *ngIf="!isLoading">
+    <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+      <div class="form-group pt-3">
+        <label for="title">Name</label>
+        <input
+          class="form-control py-1 px-2 redBorder"
+          formControlName="name"
+          id="title"
+          type="text"
+        />
+        <span
+          *ngIf="!roomForm.get('name').valid && roomForm.get('name').touched"
+          class="form-text text-muted"
+        >
+          <span *ngIf="roomForm.get('name').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="roomForm.get('name').errors.maxlength"
+            >This field should not be longer than 20 characters</span
+          >
+        </span>
+      </div>
+      <div class="form-group py-2">
+        <label for="description">Description</label>
+        <textarea
+          class="form-control resize-none py-1 px-2 redBorder"
+          formControlName="description"
+          id="description"
+          rows="4"
+        ></textarea>
+        <span
+          *ngIf="
+            !roomForm.get('description').valid &&
+            roomForm.get('description').touched
+          "
+          class="form-text text-muted"
+        >
+          <span *ngIf="roomForm.get('description').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="roomForm.get('description').errors.maxlength"
+            >This field should not be longer than 60 characters</span
+          >
+        </span>
+      </div>
+
+      <div class="form-group py-2">
+        <label for="image">Image</label>
+
+        <div *ngIf="hasImg" class="roomImgContainer container-fluid mx-auto">
+          <img src="{{ DEFAULT_PART }}{{ base64Img }}" class="img-responsove" />
+        </div>
+
+        <input
+          class="form-control p-1 redBorder"
+          formControlName="img"
+          id="image"
+          type="file"
+          (change)="handleUpload($event)"
+        />
+        <span
+          *ngIf="roomForm.get('img').touched && roomForm.get('img').errors"
+          class="form-text text-muted"
+        >
+          This field is required.</span
+        >
+      </div>
+
+      <div class="form-group py-2">
+        <label for="price">Price</label>
+
+        <input
+          class="form-control py-1 px-2 redBorder"
+          formControlName="price"
+          id="price"
+          type="number"
+          min="1"
+        />
+
+        <span
+          *ngIf="!roomForm.get('price').valid && roomForm.get('price').touched"
+          class="form-text text-muted"
+        >
+          <span *ngIf="roomForm.get('price').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="roomForm.get('price').errors.min"
+            >Please choose a number equal or larger than 1</span
+          >
+        </span>
+      </div>
+
+      <div class="form-group pt-2 pb-3">
+        <label for="numBeds">Number Of Beds</label>
+        <input
+          class="form-control py-1 px-2 redBorder"
+          formControlName="numberOfBeds"
+          type="number"
+          min="1"
+        />
+        <span
+          *ngIf="
+            !roomForm.get('numberOfBeds').valid &&
+            roomForm.get('numberOfBeds').touched
+          "
+          class="form-text text-muted"
+        >
+          <span *ngIf="roomForm.get('numberOfBeds').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="roomForm.get('numberOfBeds').errors.min"
+            >Please choose a number equal or larger than 1</span
+          >
+        </span>
+      </div>
+
+      <div class="form-group pt-2 pb-3">
+        <!-- <select
+          class="form-control py-1 px-2 redBorder"
+          formControlName="amenities"
+          multiple
+        >
+          <option *ngFor="let ops of amenitiesValues" [ngValue]="ops">
+            {{ ops | displayAmenities }}
+          </option>
+        </select> -->
+        <ngx-bootstrap-multiselect
+          [options]="amenitiesValues"
+          formControlName="amenities"
+          [settings]="mySettings"
+          [texts]="myTexts"
+          [class.is-invalid]="
+            !roomForm.get('amenities').valid &&
+            roomForm.get('amenities').touched
+          "
+          class="redBorder px-2 py-1 w-100"
+        ></ngx-bootstrap-multiselect>
+        <p
+          *ngIf="
+            !roomForm.get('amenities').valid &&
+            roomForm.get('amenities').touched
+          "
+          class="form-text text-muted"
+        >
+          This field is required.
+        </p>
+      </div>
+
+      <div class="modal-footer pt-2">
+        <button type="submit" class="btn btn-success px-3 py-1 me-1">
+          {{ roomData ? "Save Changes" : "Create" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

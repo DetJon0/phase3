@@ -1,0 +1,136 @@
+<!-- modal i cili ka infot dhe nje date picker me datat qe jane te zena disabled
+nr e personve -->
+<div class="p-3">
+  <!-- <div class="d-flex justify-content-between"> -->
+  <div class="modal-header pb-3">
+    <h4>Booking "{{ this.roomData.name }}"</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.close()"
+    ></button>
+  </div>
+  <!-- </div> -->
+
+  <div class="modal-body">
+    <div class="text-center"><app-loading *ngIf="isLoading"></app-loading></div>
+    <app-error
+      [errorMsg]="displayMessage"
+      [isError]="isError"
+      (remove)="this.activeModal.close()"
+      *ngIf="displayMessage"
+    ></app-error>
+
+    <form
+      *ngIf="!isLoading && !displayMessage"
+      [formGroup]="this.bookingForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <!-- <div class="row justify-content-between p-4"> -->
+      <div class="py-3">
+        <label for="check-in" class="form-label pb-1">Check In:</label>
+        <input
+          autocomplete="off"
+          type="text"
+          id="check-in"
+          formControlName="check-in"
+          placeholder="mm/dd/yyyy"
+          class="form-control py-1 px-2 redBorder"
+          bsDatepicker
+          [datesDisabled]="bookedDates"
+          [minDate]="today"
+          [bsConfig]="bsConfig"
+        />
+        <div
+          *ngIf="
+            !this.bookingForm.get('check-in').valid &&
+            this.bookingForm.get('check-in').touched
+          "
+        >
+          <p
+            *ngIf="this.bookingForm.get('check-in').errors.required"
+            class="invalid-data"
+          >
+            *This field is required
+          </p>
+
+          <p
+            class="invalid-data"
+            *ngIf="this.bookingForm.get('check-in').errors.bsDate?.minDate"
+          >
+            Please select a valid date (not the past)
+          </p>
+        </div>
+      </div>
+      <div class="pb-3">
+        <label for="check-out" class="form-label">Check Out:</label>
+        <input
+          autocomplete="off"
+          type="text"
+          id="check-out"
+          formControlName="check-out"
+          placeholder="mm/dd/yyyy"
+          class="form-control py-1 px-2 redBorder"
+          bsDatepicker
+          [datesDisabled]="bookedDates"
+          [minDate]="today"
+          [bsConfig]="bsConfig"
+        />
+        <div
+          *ngIf="
+            !this.bookingForm.get('check-out').valid &&
+            this.bookingForm.get('check-out').touched
+          "
+        >
+          <p
+            *ngIf="this.bookingForm.get('check-out').errors.required"
+            class="invalid-data"
+          >
+            *This field is required
+          </p>
+
+          <p
+            class="invalid-data"
+            *ngIf="this.bookingForm.get('check-out').errors?.bsDate?.minDate"
+          >
+            Please select a valid date (not the past)
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="invalid-data"
+        *ngIf="this.bookingForm.invalid && this.bookingForm.errors"
+      >
+        <span *ngIf="this.bookingForm.errors.checkOutBefore">
+          Please select a check-out later or equal than check-in
+        </span>
+        <span *ngIf="this.bookingForm.errors.rangeForbidden">
+          Room is booked in this interval, please choose the valid interval.
+        </span>
+      </div>
+
+      <!-- </div> -->
+      <!-- </div> -->
+      <div class="modal-footer pt-3">
+        <!-- <div class="text-end"> -->
+        <button
+          type="submit"
+          ngbAutofocus
+          class="btn btn-outline-success px-2 py-1 me-1"
+        >
+          Book
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger px-2 py-1"
+          (click)="activeModal.close()"
+        >
+          Close
+        </button>
+        <!-- </div> -->
+      </div>
+    </form>
+  </div>
+</div>

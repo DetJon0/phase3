@@ -1,0 +1,38 @@
+<!-- nje liste, ose naj tip nav-i qe te mund te kalohet nga user-profile, ne user-booking -->
+<div class="container mx-auto">
+  <div class="row py-4">
+    <div class="col-12 pb-3 col-md-4 pb-md-0 col-xl-3 px-2 list-group">
+      <a
+        routerLink="../userPanel"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="list-group-item list-group-item-action px-3 py-2"
+      >
+        User Profile
+      </a>
+      <a
+        (click)="onBookingData()"
+        routerLink="bookings"
+        routerLinkActive="active"
+        class="list-group-item list-group-item-action px-3 py-2"
+      >
+        Bookings
+      </a>
+    </div>
+    <div class="col px-2">
+      <div class="text-center">
+        <app-loading *ngIf="isLoading"></app-loading>
+      </div>
+      <app-error
+        [errorMsg]="errorMessage"
+        [isError]="true"
+        (remove)="errorMessage = null"
+        *ngIf="errorMessage"
+      ></app-error>
+
+      <div *ngIf="!errorMessage && !isLoading">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

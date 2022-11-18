@@ -1,0 +1,41 @@
+<div class="bg-white m-3 p-2">
+  <div class="row grey2 p-2 mx-2 mt-3">
+    <div
+      class="col d-flex justify-content-between align-items-center flex-wrap"
+    >
+      <b>Manage Users</b>
+      <div class="">
+        <span></span>
+        <input
+          type="text"
+          class="search-box grey px-3 py-2"
+          placeholder="Search..."
+          (input)="onSearchUsers($event)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-2">
+    <div class="col table-responsive-md">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="ps-2">Username</th>
+            <th>Firstname</th>
+            <th class="">Lastname</th>
+            <th class="">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers">
+            <td class="ps-2 py-3 col-3">{{ user.username }}</td>
+            <td class="py-3 col-3">{{ user.firstName }}</td>
+            <td class="py-3 col-3">{{ user.lastName }}</td>
+            <td class="py-3 col-3">{{ user.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

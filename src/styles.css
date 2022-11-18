@@ -1,0 +1,342 @@
+/* You can add global styles to this file, and also import other style files */
+/* *{
+    border: 1px solid black;
+
+} */
+*{
+    margin: 0px !important;
+    padding: 0px !important;
+    box-sizing: border-box !important ;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+.circle{
+    border-radius: 50%;
+}
+.circle-3{
+    border-radius: 50%;
+    width: 3rem;
+}
+.btn-none{
+    border: none;
+    background-color: inherit;
+}
+.grey{
+    background-color: #f8f9fa;
+}
+.search-box{
+    border: none;
+    /* background-color: #fafaf8; */
+    border-radius: 3rem;
+}
+.pop-up{
+    background-color: #e9ecef99;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+.pop-up-element{
+    overflow-y: auto;
+    max-height: 100vh;
+}
+.grey2{
+    background-color: #e9ecef;
+}
+.full-height{
+    height: 100vh;
+}
+.scroll{
+    overflow: auto;
+    height: 80vh;
+}
+.fixed{
+    position: fixed;
+}
+.h100{
+    height: 100%;
+}
+.w100{
+  width: 100%;
+}
+@media (max-width: 767px) {
+    .full-height{
+        height: fit-content;
+
+    }
+}
+.redBorder.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+/* .tr-pointer:hover{
+    cursor: pointer;
+    background-color: #edede9;
+} */
+.imgContainer{
+    width: 5rem;
+    height: auto;
+}
+.imgContainer img{
+    width: 100%;
+}
+
+.round-border{
+    border-radius: 1rem;
+}
+.shadow-con{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+.bold{
+    font-weight: 600;
+}
+
+.roomImgContainer{
+    width:10rem;
+    height: auto;
+}
+.roomImgContainer img{
+    width: 100%;
+}
+.clickAble{
+    cursor: pointer;
+}
+.centerElement{
+    display:flex;
+    align-items: center;
+}
+.inline{
+    display: inline-block !important;
+}
+.modal-dialog-centered{
+  margin: 0 auto !important;
+}
+
+/* auto-center modals */
+.modal-dialog{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto !important;
+}
+/*  */
+
+/* client */
+
+.client-bg-color{
+  background-color: #edfafd;
+}
+
+/* .img-carousel-container{
+  height: 80vh;
+  overflow: hidden;
+} */
+.carousel-img{
+  object-fit: cover;
+  height: 85vh;
+}
+
+.anchor-none, .anchor-none:hover{
+  text-decoration: none;
+  color : #015ba0;
+}
+.relative{
+  position:relative;
+}
+.buton-zIndex-1100 {
+  padding: .5rem 1rem !important;
+  /* background-color: whitesmoke; */
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  text-transform: uppercase;
+  z-index: 900;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.bg-custom{
+  background-color:rgba(0, 0, 0, 0.3);
+  width: 100%;
+  position: absolute;
+  left: 0;
+}
+
+.img-mainpage{
+  width: 70%;
+  min-width: 330px;
+
+}
+.sideText{
+  color : #6c757d;
+  font-size: 0.8rem;
+ }
+
+.foter-link:hover{
+  text-decoration: underline;
+  color: #024171;
+}
+.max-w-250{
+  max-width: 250px;
+}
+.width-auto{
+  width: auto;
+}
+.bg-search-rooms{
+  background-color: #003552;
+  border-radius: 0 0 1rem 1rem;
+}
+.bg-search-rooms label{
+  color:white;
+}
+/* grid gh and rooms */
+.grid-container{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:20px;
+  grid-auto-rows: 1fr;
+}
+@media (max-width: 991px){
+  .grid-container{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 580px){
+  .grid-container{
+    grid-template-columns: 1fr;
+  }
+}
+
+.animation{
+  transition:.1s;
+}
+.animation:hover{
+  transform: scale(102%);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.border-bottom{
+  border-bottom: 2px solid grey;
+}
+.min-h-90vh{
+  min-height: 90vh;
+}
+.nav-b-border {
+  border-bottom: 2px groove lightgrey;
+}
+.table-cli-border{
+  border: 5px outset white;
+}
+.h-70{
+  height:70%
+}
+.row-size-equal{
+    display: grid;
+    grid-auto-rows: 1fr;
+}
+.max-w-550{
+  max-width: 550px;
+}
+
+.invalid-data{
+  color:red;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+.user-input{
+  border: none;
+  border-bottom: solid 1px black;
+  border-radius: 0;
+  background: inherit;
+}
+.user-input:focus{
+  box-shadow: none;
+}
+.effectHover:hover{
+  background-color: grey;
+  color:white;
+}
+.nav-element{
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+.inline-space{
+  display:inline-block;
+  width:2rem;
+}
+
+.conPadding{
+  padding: 0 5rem !important;
+}
+/* 1200-4 1000-3 800-2 600-1 500-0.1 */
+@media (max-width:1200px){
+  .conPadding{
+    padding: 0 4rem !important;
+  }
+}
+@media (max-width:1000px){
+  .conPadding{
+    padding: 0 3rem !important;
+  }
+}
+@media (max-width:800px){
+  .conPadding{
+    padding: 0 2rem !important;
+  }
+}
+@media (max-width:600px){
+  .conPadding{
+    padding: 0 1rem !important;
+  }
+}
+@media (max-width:500px){
+  .conPadding{
+    padding: 0 .1rem !important;
+  }
+}
+/* klasa item per caruselin e butstrapit*/
+/* .item{
+  height:10vh;
+} */
+@media (max-width:1000px){
+  .item{
+    height: 80vh;
+  }
+}
+@media (max-width:800px){
+  .item{
+    height: 70vh;
+  }
+}
+@media (max-width:400px){
+  .item{
+    height: 60vh;
+  }
+}
+
+/* calendar */
+bs-datepicker-navigation-view{
+  height:inherit;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.bs-datepicker-body{
+  border-radius: 0 0 1rem 1rem;
+}
+.bs-datepicker-head{
+  border-radius: 1rem 1rem 0 0;
+}
+span.disabled.ng-star-inserted:hover{
+  background-color: #e5989b;
+  color:white;
+  cursor: not-allowed;
+}

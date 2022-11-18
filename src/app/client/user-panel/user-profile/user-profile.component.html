@@ -1,0 +1,299 @@
+<!-- te gjithe te dhenat e userit dhe nje 'buton qe kur klikohet te mund te ndryshoje
+  secilen nga ato...' por besoj do jete me shume nje forme e vetme, ku put te gjithe te dhenat ne te
+njejten kohe, dhe nje form tjeter per passwordin...
+per formen e modifikimit mund te perdorim formen e regjistrimit, vetem se i japim vlerat e userit. -->
+<!-- per passwordin besoj duhet nje forme tjeter -->
+<!-- <button class="btn btn-primary" (click)="onOpenModal()">Open register</button>
+<button class="btn btn-primary" (click)="onPasswordModal()">
+  Open password-changer
+</button> -->
+
+<div class="table-cli-border p-3 pt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h3>Personal details</h3>
+      <p class="sideText">Update your info...</p>
+    </div>
+    <div class="circle-3">
+      <img src="../../../../assets/photos/user.png" class="w-100" />
+    </div>
+  </div>
+  <div class="pt-2">
+    <hr />
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="py-3 px-2 col-5 col-md-4 col-xl-3">Username</td>
+            <td class="py-3 pe-2 col" *ngIf="!this.editArray[0]">
+              {{ userData.userName }}
+            </td>
+
+            <td class="py-3 pe-2 col" *ngIf="this.editArray[0]">
+              <input
+                type="text"
+                id="username"
+                class="form-control py-1 redBorder user-input ps-1"
+                formControlName="userName"
+              />
+              <span
+                *ngIf="
+                  !editForm.get('userName').valid &&
+                  editForm.get('userName').touched
+                "
+                class="form-text text-muted"
+              >
+                <span *ngIf="editForm.get('userName').errors.required"
+                  >This field is required.</span
+                >
+                <span *ngIf="editForm.get('userName').errors.pattern"
+                  >Only characters allowed (3+).</span
+                >
+              </span>
+            </td>
+
+            <td class="py-3 pe-2 col-2 text-end">
+              <a
+                *ngIf="!this.editArray[0]"
+                (click)="onShowFormInput(0)"
+                class="anchor-none clickAble"
+                >Edit</a
+              >
+              <span *ngIf="this.editArray[0]">
+                <button
+                  type="submit"
+                  class="btn btn-outline-success btn-none p-1 me-1"
+                >
+                  Save
+                </button>
+                <button
+                  (click)="onHideFormInput(0)"
+                  class="btn effectHover p-1 px-2"
+                >
+                  <fa-icon [icon]="faXmark"></fa-icon>
+                </button>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="py-3 px-2 col-5 col-md-4 col-xl-3">Fistname</td>
+            <td class="py-3 pe-2 col" *ngIf="!this.editArray[1]">
+              {{ userData.firstName }}
+            </td>
+
+            <td class="py-3 pe-2 col" *ngIf="this.editArray[1]">
+              <input
+                type="text"
+                id="firstName"
+                class="form-control py-1 redBorder user-input ps-1"
+                formControlName="firstName"
+              />
+              <span
+                *ngIf="
+                  !this.editForm.get('firstName').valid &&
+                  this.editForm.get('firstName').touched
+                "
+                class="form-text text-muted"
+              >
+                <span *ngIf="this.editForm.get('firstName').errors.required"
+                  >This field is required.</span
+                >
+                <span *ngIf="this.editForm.get('firstName').errors.pattern"
+                  >Only characters allowed (min 3+).</span
+                >
+              </span>
+            </td>
+
+            <td class="py-3 pe-2 col-2 text-end">
+              <a
+                *ngIf="!this.editArray[1]"
+                (click)="onShowFormInput(1)"
+                class="anchor-none clickAble"
+                >Edit</a
+              >
+              <span *ngIf="this.editArray[1]">
+                <button
+                  type="submit"
+                  class="btn btn-outline-success btn-none p-1 me-1"
+                >
+                  Save
+                </button>
+                <button
+                  (click)="onHideFormInput(1)"
+                  class="btn effectHover p-1 px-2"
+                >
+                  <fa-icon [icon]="faXmark"></fa-icon>
+                </button>
+              </span>
+            </td>
+            <!-- edit do jete ne nivel fushe apo nivel user, dhe i bie shtojme nje button ne fund vetem -->
+          </tr>
+          <tr>
+            <td class="py-3 px-2">Lastname</td>
+            <td class="py-3 pe-2" *ngIf="!this.editArray[2]">
+              {{ userData.lastName }}
+            </td>
+
+            <td class="py-3 pe-2 col" *ngIf="this.editArray[2]">
+              <input
+                type="text"
+                id="lastName"
+                class="form-control py-1 redBorder user-input ps-1"
+                formControlName="lastName"
+              />
+              <span
+                *ngIf="
+                  !this.editForm.get('lastName').valid &&
+                  this.editForm.get('lastName').touched
+                "
+                class="form-text text-muted"
+              >
+                <span *ngIf="this.editForm.get('lastName').errors.required"
+                  >This field is required.</span
+                >
+                <span *ngIf="this.editForm.get('lastName').errors.pattern"
+                  >Only characters allowed (min 3+).</span
+                >
+              </span>
+            </td>
+
+            <td class="py-3 pe-2 col-2 text-end">
+              <a
+                *ngIf="!this.editArray[2]"
+                (click)="onShowFormInput(2)"
+                class="anchor-none clickAble"
+                >Edit</a
+              >
+              <span *ngIf="this.editArray[2]">
+                <button
+                  type="submit"
+                  class="btn btn-outline-success btn-none p-1 me-1"
+                >
+                  Save
+                </button>
+                <button
+                  (click)="onHideFormInput(2)"
+                  class="btn effectHover p-1 px-2"
+                >
+                  <fa-icon [icon]="faXmark"></fa-icon>
+                </button>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="py-3 px-2">Phone number</td>
+            <td class="py-3 pe-2" *ngIf="!this.editArray[4]">
+              {{ userData.phoneNumber }}
+            </td>
+
+            <td class="py-3 pe-2 col" *ngIf="this.editArray[4]">
+              <input
+                type="text"
+                id="phoneNum"
+                class="form-control py-1 redBorder user-input ps-1"
+                formControlName="phoneNumber"
+              />
+              <span
+                *ngIf="
+                  !this.editForm.get('phoneNumber').valid &&
+                  this.editForm.get('phoneNumber').touched
+                "
+                class="form-text text-muted"
+              >
+                <span *ngIf="this.editForm.get('phoneNumber').errors.required"
+                  >This field is required.</span
+                >
+                <span *ngIf="this.editForm.get('phoneNumber').errors.pattern"
+                  >Format: +0123456789</span
+                >
+              </span>
+            </td>
+
+            <td class="py-3 pe-2 col-2 text-end">
+              <a
+                *ngIf="!this.editArray[4]"
+                (click)="onShowFormInput(4)"
+                class="anchor-none clickAble"
+                >Edit</a
+              >
+              <span *ngIf="this.editArray[4]">
+                <button
+                  type="submit"
+                  class="btn btn-outline-success btn-none p-1 me-1"
+                >
+                  Save
+                </button>
+                <button
+                  (click)="onHideFormInput(4)"
+                  class="btn effectHover p-1 px-2"
+                >
+                  <fa-icon [icon]="faXmark"></fa-icon>
+                </button>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="py-3 px-2">Email address</td>
+            <td class="py-3 pe-2" *ngIf="!this.editArray[3]">
+              {{ userData.email }}
+            </td>
+
+            <!-- <td class="py-3 pe-2 col" *ngIf="this.editArray[3]">
+              <input
+                class="form-control py-1 redBorder user-input ps-1"
+                id="email"
+                type="text"
+                formControlName="email"
+              />
+              <span
+                *ngIf="
+                  !this.editForm.get('email').valid &&
+                  this.editForm.get('email').touched
+                "
+                class="form-text text-muted"
+              >
+                <span *ngIf="this.editForm.get('email').errors.required"
+                  >This field is required.</span
+                >
+                <span *ngIf="this.editForm.get('email').errors.email"
+                  >Email format : someone@something.something</span
+                >
+              </span>
+            </td> -->
+
+            <td></td>
+            <!-- <td class="py-3 pe-2 col-2 text-end">
+              <a
+                *ngIf="!this.editArray[3]"
+                (click)="onShowFormInput(3)"
+                class="anchor-none clickAble"
+                >Edit</a
+              >
+              <span *ngIf="this.editArray[3]">
+                <button
+                  type="submit"
+                  class="btn btn-outline-success btn-none p-1 me-1"
+                >
+                  Save
+                </button>
+                <button
+                  (click)="onHideFormInput(3)"
+                  class="btn effectHover p-1 px-2"
+                >
+                  <fa-icon [icon]="faXmark"></fa-icon>
+                </button>
+              </span>
+            </td> -->
+          </tr>
+          <tr>
+            <td colspan="4" class="py-3 pe-2 text-center">
+              <a (click)="onPasswordModal()" class="anchor-none clickAble"
+                >Change Password</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

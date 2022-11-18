@@ -1,0 +1,56 @@
+<!-- headeri dhe outleti -->
+<header class="sticky-header">
+  <app-client-header></app-client-header>
+</header>
+
+<div class="client-bg-color min-h-90vh">
+  <div class="container-fluid conPadding">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<footer class="py-5 px-3" id="contact-section">
+  <div class="row justify-content-evenly">
+    <div class="col-12 col-md-3 mt-md-0 width-auto">
+      <h4>
+        <img class="circle-3" src="../../assets/photos/logo.jpg" />
+        Business
+      </h4>
+      <p class="sideText max-w-250">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non
+        reprehenderit accusamus, sunt inventore laboriosam fuga!
+      </p>
+    </div>
+    <div class="col-12 col-md-3 mt-4 mt-md-0 width-auto">
+      <h4>About Us</h4>
+      <a class="anchor-none clickAble d-block foter-link pt-2" routerLink=""
+        >Lorem ipsum dolor elit
+      </a>
+      <a class="anchor-none clickAble d-block foter-link pt-2" routerLink=""
+        >sit amet consectetur
+      </a>
+      <a class="anchor-none clickAble d-block foter-link pt-2" routerLink=""
+        >Officiis cupiditate</a
+      >
+      <a class="anchor-none clickAble d-block foter-link pt-2" routerLink=""
+        >perspiciatis numquam
+      </a>
+    </div>
+    <div class="col-12 col-md-3 mt-4 mt-md-0 width-auto">
+      <h4 id="contact-us">Contact Us</h4>
+      <p class="pt-2 sideText max-w-250">
+        3015 Grand Ave, Coconut Grove, Merrick Way, FL 12345
+      </p>
+      <a
+        class="anchor-none clickAble d-block foter-link pt-2"
+        href="mailto:test@test.com"
+        >test@test.com</a
+      >
+      <a
+        class="anchor-none clickAble d-block foter-link pt-2"
+        href="tel:1234567890"
+        >123-456-7890</a
+      >
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,26 @@
+<nav class=" navbar bg-light">
+    <div class="container-fluid justify-content-end">
+
+        <img class="circle-3" src="..\..\assets\photos\user.png" alt="user">
+        <div class="p-1">
+            <a class="navbar-brand " >{{ username }}</a>
+            <p class="sideText">{{ role }}</p>
+        </div>
+        <button
+        class="btn-none py-1 px-2"
+        title="logOut"
+        (click)="onLogout()">
+
+        <fa-icon [icon]="faRightFromBracket"></fa-icon>
+
+        </button>
+
+    </div>
+</nav>
+
+<div class="px-3 nav-line-color py-2">
+    <app-ng-dynamic-breadcrumb [bgColor]="'#e5e5db'" [lastLinkColor]="'#000'"
+    [symbol]="' -> '"
+    ></app-ng-dynamic-breadcrumb>
+</div>
+
