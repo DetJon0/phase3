@@ -20,7 +20,7 @@ per formen e modifikimit mund te perdorim formen e regjistrimit, vetem se i japi
   </div>
   <div class="pt-2">
     <hr />
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="userData" [formGroup]="editForm" (ngSubmit)="onSubmit()">
       <table class="table">
         <tbody>
           <tr>

@@ -1,49 +1,74 @@
-<div class="container  p-4">
-<div class="modal-header pb-2">
-  <h4 class="modal-title">{{ guestHouseData ? "Edit Guest House" : "Create Guest House" }}</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="onHideGuestForm()"></button>
-</div>
+<div class="container p-4">
+  <div class="modal-header pb-2">
+    <h4 class="modal-title" ngbAutofocus>
+      {{ guestHouseData ? "Edit Guest House" : "Create Guest House" }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="onHideGuestForm()"
+    ></button>
+  </div>
 
-<div
-    *ngIf = 'isLoading'
-    class="text-center py-2" >
-      <app-loading></app-loading>
-</div>
+  <div *ngIf="isLoading" class="text-center py-2">
+    <app-loading></app-loading>
+  </div>
 
-<div class="modal-body" *ngIf = '!isLoading'>
-  <form [formGroup] = "guestHouseForm" (ngSubmit)="onSubmit()" >
+  <div class="modal-body" *ngIf="!isLoading">
+    <form [formGroup]="guestHouseForm" (ngSubmit)="onSubmit()">
       <div class="form-group pt-3">
-          <label for="title">Title</label>
-          <input
+        <label for="title">Title</label>
+        <input
           class="form-control py-1 px-2 redBorder"
           id="title"
           type="text"
-          formControlName = "ghName">
-          <span *ngIf="!guestHouseForm.get('ghName').valid && guestHouseForm.get('ghName').touched" class="form-text text-muted">
-            <span *ngIf="guestHouseForm.get('ghName').errors.required">This field is required.</span>
-            <span *ngIf="guestHouseForm.get('ghName').errors.maxlength">This field should not be longer than 20 characters</span>
-          </span>
+          formControlName="ghName"
+        />
+        <span
+          *ngIf="
+            !guestHouseForm.get('ghName').valid &&
+            guestHouseForm.get('ghName').touched
+          "
+          class="form-text text-muted"
+        >
+          <span *ngIf="guestHouseForm.get('ghName').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="guestHouseForm.get('ghName').errors.maxlength"
+            >This field should not be longer than 20 characters</span
+          >
+        </span>
       </div>
 
       <div class="form-group pt-2 pb-3">
-          <label for="description">Description</label>
-          <textarea
+        <label for="description">Description</label>
+        <textarea
           class="form-control resize-none py-1 px-2 redBorder"
           id="description"
           rows="4"
-          formControlName = "ghDescription"
-          ></textarea>
-          <span *ngIf="!guestHouseForm.get('ghDescription').valid && guestHouseForm.get('ghDescription').touched" class="form-text text-muted">
-            <span *ngIf="guestHouseForm.get('ghDescription').errors.required">This field is required.</span>
-            <span *ngIf="guestHouseForm.get('ghDescription').errors.maxlength">This field should not be longer than 60 characters</span>
-          </span>
+          formControlName="ghDescription"
+        ></textarea>
+        <span
+          *ngIf="
+            !guestHouseForm.get('ghDescription').valid &&
+            guestHouseForm.get('ghDescription').touched
+          "
+          class="form-text text-muted"
+        >
+          <span *ngIf="guestHouseForm.get('ghDescription').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="guestHouseForm.get('ghDescription').errors.maxlength"
+            >This field should not be longer than 60 characters</span
+          >
+        </span>
       </div>
-      <div class=" modal-footer py-2">
-          <button
-          type="submit"
-          class="btn btn-success px-3 py-1 me-1"
-          >{{ guestHouseData ? 'Save Changes' : 'Create' }}</button>
+      <div class="modal-footer py-2">
+        <button type="submit" class="btn btn-success px-3 py-1 me-1">
+          {{ guestHouseData ? "Save Changes" : "Create" }}
+        </button>
       </div>
-  </form>
-</div>
+    </form>
+  </div>
 </div>

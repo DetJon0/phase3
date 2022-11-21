@@ -3,6 +3,7 @@ import { formatDate } from '@angular/common';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../user.service';
+import { BookingModel } from 'src/app/shared/models/booking.model';
 
 @Component({
   selector: 'app-user-bookings',
@@ -12,8 +13,8 @@ import { UserService } from '../../user.service';
 export class UserBookingsComponent implements OnInit {
   faInfo = faCircleInfo;
 
-  bookingsData = [];
-  filteredBookingsData = [];
+  bookingsData: BookingModel[] = [];
+  filteredBookingsData: BookingModel[] = [];
   // array me booking data, duhet bo nje model
   userBookingSub: Subscription;
 

@@ -2,16 +2,16 @@
   <div class="col pt-4">
     <!-- loading / error -->
     <div class="text-center"><app-loading *ngIf="isLoading"></app-loading></div>
-    <app-error
+    <!-- <app-error
       [errorMsg]="errorMessage"
       [isError]="true"
       (remove)="errorMessage = null"
       *ngIf="errorMessage"
-    ></app-error>
+    ></app-error> -->
 
-    <section *ngIf="!isLoading && !errorMessage" class="relative">
+    <section *ngIf="!isLoading" class="relative">
       <carousel>
-        <slide *ngFor="let gh of guestHouses">
+        <slide *ngFor="let gh of guestHouses.length ? guestHouses : dummyData">
           <img
             [src]="'../../assets/photos/' + gh.img"
             class="w100 carousel-img"
@@ -42,7 +42,10 @@
         id="check-in"
         formControlName="check-in"
         placeholder="mm/dd/yyyy"
-        class="form-control py-1 px-2 redBorder"
+        class="form-control py-1 px-2"
+        [ngClass]="{
+          redBorder: !this.searchRooms.get('check-in').valid && showHelpMessages
+        }"
         bsDatepicker
         [minDate]="today"
         [bsConfig]="bsConfig"
@@ -50,7 +53,8 @@
       <div
         *ngIf="
           !this.searchRooms.get('check-in').valid &&
-          this.searchRooms.get('check-in').touched
+          this.searchRooms.get('check-in').touched &&
+          showHelpMessages
         "
       >
         <p
@@ -75,7 +79,10 @@
         id="check-out"
         formControlName="check-out"
         placeholder="mm/dd/yyyy"
-        class="form-control py-1 px-2 redBorder"
+        class="form-control py-1 px-2"
+        [ngClass]="{
+          redBorder: !this.searchRooms.get('check-in').valid && showHelpMessages
+        }"
         bsDatepicker
         [minDate]="today"
         [bsConfig]="bsConfig"
@@ -83,7 +90,8 @@
       <div
         *ngIf="
           !this.searchRooms.get('check-out').valid &&
-          this.searchRooms.get('check-out').touched
+          this.searchRooms.get('check-out').touched &&
+          showHelpMessages
         "
       >
         <p
@@ -113,14 +121,18 @@
       <input
         type="number"
         min="1"
-        class="form-control py-1 px-2 redBorder"
+        class="form-control py-1 px-2"
+        [ngClass]="{
+          redBorder: !this.searchRooms.get('check-in').valid && showHelpMessages
+        }"
         formControlName="num-beds"
         id="num-beds"
       />
       <div
         *ngIf="
           !this.searchRooms.get('num-beds').valid &&
-          this.searchRooms.get('num-beds').touched
+          this.searchRooms.get('num-beds').touched &&
+          showHelpMessages
         "
       >
         <p
@@ -137,8 +149,8 @@
         </p>
       </div>
     </div>
-    <div class="col-12 pt-2 pt-md-0 col-md-2">
-      <button type="submit" class="btn btn-primary py-1 py-md-0 w-100 h-100">
+    <div class="col-12 pt-2 pt-md-0 col-md-2 d-flex align-items-center">
+      <button type="submit" class="btn btn-primary py-1 py-md-0 w-100 h-60">
         Search
       </button>
     </div>
@@ -169,5 +181,55 @@
       repellendus asperiores, delectus exercitationem recusandae numquam nulla
       voluptatem!
     </p>
+  </div>
+</section>
+
+<section *ngIf="guestHouses.length" class="py-4">
+  <div class="container mx-auto">
+    <h2 class="text-center pt-4">
+      {{ "Top " + guestHouses.length + " booked Guest Houses" }}
+    </h2>
+
+    <div class="py-4">
+      <div class="text-center">
+        <app-loading *ngIf="isLoading"></app-loading>
+      </div>
+      <app-error
+        [errorMsg]="errorMessage"
+        [isError]="true"
+        (remove)="errorMessage = null"
+        *ngIf="errorMessage"
+      ></app-error>
+
+      <div class="grid-container px-1" *ngIf="!isLoading && !errorMessage">
+        <div class="card animation" *ngFor="let gh of this.guestHouses">
+          <img
+            [src]="'../../../assets/photos/' + gh.img"
+            class="card-img-top h-70"
+            alt="..."
+          />
+          <div
+            class="card-body px-2 py-3 text-center d-flex flex-column justify-content-between"
+          >
+            <div>
+              <h5 class="card-title">{{ gh.name | uppercase }}</h5>
+              <p class="card-text py-2 card-text">
+                {{ gh.description }}
+              </p>
+            </div>
+            <a
+              [routerLink]="[
+                '/client/guestHousesCards/roomsCards',
+                gh.id,
+                gh.name
+              ]"
+              queryParamsHandling="merge"
+              class="btn btn-primary px-2 py-1 cardButton"
+              >View Details</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

@@ -11,14 +11,27 @@ import { UserData } from '../shared/models/user.model';
 export class UserComponent implements OnInit {
   faInfo = faCircleInfo;
 
-  users: UserData[];
-  filteredUsers: UserData[];
+  users: UserData[] = [];
+  filteredUsers: UserData[] = [];
+
+  isLoading = false;
+  errorMsg = null;
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((users) => {
-      this.users = users;
-      this.filteredUsers = users;
+    this.isLoading = true;
+    this.userService.getUsers().subscribe({
+      next: (users) => {
+        this.isLoading = false;
+        this.users = users;
+        this.filteredUsers = users;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.errorMsg =
+          'An error accrued fetching users. Please try again later.';
+      },
     });
   }
   onSearchUsers(event: InputEvent) {
@@ -32,5 +45,8 @@ export class UserComponent implements OnInit {
         user.username.toLowerCase().includes(searchVal.toLowerCase())
       );
     });
+  }
+  onRemoveError() {
+    this.errorMsg = null;
   }
 }

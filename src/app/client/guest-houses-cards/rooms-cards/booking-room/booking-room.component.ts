@@ -24,11 +24,11 @@ export class BookingRoomComponent implements OnInit {
   isError: boolean;
   displayMessage: string;
   isRangeForbidden = false;
+  showHelpMessages = false;
 
-  bsConfig: Partial<BsDatepickerConfig> = Object.assign(
-    {},
-    { containerClass: 'theme-dark-blue round-border' }
-  );
+  bsConfig: Partial<BsDatepickerConfig> = Object.assign({
+    containerClass: 'theme-dark-blue round-border',
+  });
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -92,6 +92,7 @@ export class BookingRoomComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showHelpMessages = true;
     if (!this.bookingForm.valid) {
       this.bookingForm.markAllAsTouched();
       return;

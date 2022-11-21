@@ -1,6 +1,8 @@
 <div class="container p-4">
   <div class="modal-header pb-2">
-    <h4 class="modal-title">{{ roomData ? "Edit Room" : "Create Room" }}</h4>
+    <h4 class="modal-title" ngbAutofocus>
+      {{ roomData ? "Edit Room" : "Create Room" }}
+    </h4>
     <button
       type="button"
       class="btn-close"
@@ -67,14 +69,19 @@
         </div>
 
         <input
-          class="form-control p-1 redBorder"
+          [ngClass]="{ redBorder: showImgMessage }"
+          class="form-control p-1"
           formControlName="img"
           id="image"
           type="file"
           (change)="handleUpload($event)"
         />
         <span
-          *ngIf="roomForm.get('img').touched && roomForm.get('img').errors"
+          *ngIf="
+            roomForm.get('img').touched &&
+            roomForm.get('img').errors &&
+            showImgMessage
+          "
           class="form-text text-muted"
         >
           This field is required.</span

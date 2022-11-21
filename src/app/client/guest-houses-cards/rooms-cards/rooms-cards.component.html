@@ -47,8 +47,9 @@
               ><fa-icon [icon]="faStar"></fa-icon></span
             >Amenities:
           </p>
-          <span class="ps-3" *ngFor="let anim of room.amenities">
-            {{ anim | displayAmenities }}
+          <span class="ps-3" *ngFor="let anim of room.amenities; let i = index">
+            {{ anim | displayAmenities
+            }}<span *ngIf="i + 1 !== room.amenities.length">, </span>
           </span>
         </div>
         <div class="pt-2">

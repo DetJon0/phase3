@@ -1,47 +1,80 @@
 <div class="fluid-container d-flex full-height grey">
-    <div class="col-10 col-sm-8 col-md-6 col-xl-4 mx-auto align-self-center bg-white p-5 round-border shadow-con">
-        <div class="text-center"><app-loading *ngIf="isLoadingUser" ></app-loading></div>
-        <app-error
-        [errorMsg]="errorMsg"
-        isError="true"
-        (remove)="errorMsg = null"
-        *ngIf="errorMsg"></app-error>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!isLoadingUser">
-            <div class="form-group py-2">
-                <label for="email">Email</label>
-                <input class="form-control py-1 redBorder"
-                id="email"
-                type="text"
-                formControlName="email"
-                >
-                <span *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched" class="form-text text-muted">
-                  <span *ngIf="loginForm.get('email').errors.required">This field is required.</span>
-                  <span *ngIf="loginForm.get('email').errors.email">Email format : someone@something.something</span>
-                </span>
-            </div>
-            <div class="form-group py-2">
-                <label for="pass">Password</label>
-                <input class="form-control py-1 redBorder"
-                id="pass"
-                type="password"
-                formControlName="password"
-                pattern = "(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"
-                >
-                <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="form-text text-muted">
-                  <span *ngIf="loginForm.get('password').errors.required">This field is required.</span>
-                  <span *ngIf="loginForm.get('password').errors.pattern">Should include one Uppercase, lowercase, number and special character. Length 6-10</span>
-                </span>
-            </div>
-
-
-            <div class="text-end py-2">
-                <button class="btn btn-primary mx-3 px-3 py-1"
-                type="submit"
-                >Login</button>
-                <button class="btn btn-outline-secondary px-3 py-1"
-                (click)="goToRegister()"
-                >Register</button>
-            </div>
-        </form>
+  <div
+    class="col-10 col-sm-8 col-md-6 col-xl-4 mx-auto align-self-center bg-white p-5 round-border shadow-con"
+  >
+    <div class="text-center">
+      <app-loading *ngIf="isLoadingUser"></app-loading>
     </div>
+    <app-error
+      [errorMsg]="errorMsg"
+      isError="true"
+      (remove)="errorMsg = null"
+      *ngIf="errorMsg"
+    ></app-error>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      *ngIf="!isLoadingUser"
+    >
+      <div class="form-group py-2">
+        <label for="email">Email</label>
+        <input
+          class="form-control py-1 px-2 redBorder"
+          id="email"
+          type="text"
+          formControlName="email"
+        />
+        <span
+          *ngIf="
+            !loginForm.get('email').valid && loginForm.get('email').touched
+          "
+          class="form-text text-muted"
+        >
+          <span *ngIf="loginForm.get('email').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="loginForm.get('email').errors.email"
+            >Email format : someone@something.something</span
+          >
+        </span>
+      </div>
+      <div class="form-group py-2">
+        <label for="pass">Password</label>
+        <input
+          class="form-control py-1 px-2 redBorder"
+          id="pass"
+          type="password"
+          formControlName="password"
+          pattern="(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"
+        />
+        <span
+          *ngIf="
+            !loginForm.get('password').valid &&
+            loginForm.get('password').touched
+          "
+          class="form-text text-muted"
+        >
+          <span *ngIf="loginForm.get('password').errors.required"
+            >This field is required.</span
+          >
+          <span *ngIf="loginForm.get('password').errors.pattern"
+            >Should include one Uppercase, lowercase, number and special
+            character. Length 6-10</span
+          >
+        </span>
+      </div>
+
+      <div class="text-end py-2">
+        <button class="btn btn-primary mx-3 px-3 py-1" type="submit">
+          Login
+        </button>
+        <button
+          class="btn btn-outline-secondary px-3 py-1"
+          (click)="goToRegister()"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

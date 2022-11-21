@@ -31,6 +31,7 @@ export class UserPanelComponent implements OnInit, OnDestroy {
       }
     });
     //ketu do lexoj userData dhe sa here qe mund te nderrohen slidet nuk kam pse nis kerkesa kot
+    this.isLoading = true;
 
     if (
       //nese jam tek tab i bookings e bej reload nuk do te behej kerkesa ne back per data
@@ -41,7 +42,6 @@ export class UserPanelComponent implements OnInit, OnDestroy {
       this.onBookingData();
     }
 
-    this.isLoading = true;
     this.userService.getUserData(this.userId).subscribe({
       next: (userData) => {
         this.isLoading = false;
@@ -69,15 +69,15 @@ export class UserPanelComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.userService.getUserBookings(this.userId).subscribe({
         next: (userBookingsData) => {
-          this.isLoading = false;
-
           this.userService.userBookingsData.next(userBookingsData); //i bej next te dhenave qe te kapen nga komponentja - dhe te mos bej kerkesa sa here nderrohet tabi
           this.bookingDataReceived = true;
+
+          this.isLoading = false;
         },
         error: (error) => {
-          this.isLoading = false;
           this.errorMessage =
             'An error accrued while fetching your booking data. Please try again later';
+          this.isLoading = false;
         },
       });
     }

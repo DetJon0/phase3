@@ -16,7 +16,7 @@
 
   <div class="row mt-2">
     <div class="col">
-      <table class="table" *ngIf="this.bookingsData?.length; else nothing">
+      <table class="table" *ngIf="this.bookingsData?.length">
         <thead>
           <tr>
             <th class="pt-3 pb-1 col-5 col-md-4 col-xl-3">Room name</th>
@@ -34,11 +34,9 @@
           </tr>
         </tbody>
       </table>
-      <ng-template #nothing>
-        <div>
-          <h6 class="text-center py-3">You haven't done any bookings.</h6>
-        </div>
-      </ng-template>
+      <div *ngIf="this.bookingsData !== null && !this.bookingsData.length">
+        <h6 class="text-center py-3">You haven't done any bookings.</h6>
+      </div>
     </div>
   </div>
 </div>

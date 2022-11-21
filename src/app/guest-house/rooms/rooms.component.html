@@ -39,7 +39,7 @@
         *ngIf="errorMsg"
       ></app-error>
 
-      <table *ngIf="!errorMsg" class="table">
+      <table *ngIf="!errorMsg && filteredRooms.length" class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -87,6 +87,7 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="!errorMsg && !filteredRooms.length">There are no Rooms.</div>
     </div>
   </div>
 </div>

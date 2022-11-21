@@ -21,6 +21,7 @@ export class EditRoomComponent implements OnInit {
   base64Img: string;
   hasImg = false;
   DEFAULT_PART = 'data:image/png;base64,';
+  showImgMessage = false;
 
   @Input() roomData: Room;
   @Input() ghId: number; //duhet ku nuk kam room data, tek shtimi
@@ -120,6 +121,7 @@ export class EditRoomComponent implements OnInit {
 
   onSubmit() {
     // console.log(this.roomForm)
+    this.showImgMessage = true;
 
     if (!this.roomForm.valid) {
       this.roomForm.markAllAsTouched();

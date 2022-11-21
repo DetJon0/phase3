@@ -17,25 +17,40 @@
   </div>
 
   <div class="row m-2">
-    <div class="col table-responsive-md">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="ps-2">Username</th>
-            <th>Firstname</th>
-            <th class="">Lastname</th>
-            <th class="">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of filteredUsers">
-            <td class="ps-2 py-3 col-3">{{ user.username }}</td>
-            <td class="py-3 col-3">{{ user.firstName }}</td>
-            <td class="py-3 col-3">{{ user.lastName }}</td>
-            <td class="py-3 col-3">{{ user.email }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="isLoading" class="text-center">
+      <app-loading></app-loading>
+    </div>
+
+    <div *ngIf="!isLoading" class="col table-responsive-md">
+      <app-error
+        [errorMsg]="errorMsg"
+        isError="true"
+        (remove)="onRemoveError()"
+        *ngIf="errorMsg"
+      ></app-error>
+      <div class="col table-responsive-md">
+        <table class="table" *ngIf="!errorMsg && filteredUsers.length">
+          <thead>
+            <tr>
+              <th class="ps-2">Username</th>
+              <th>Firstname</th>
+              <th class="">Lastname</th>
+              <th class="">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers">
+              <td class="ps-2 py-3 col-3">{{ user.username }}</td>
+              <td class="py-3 col-3">{{ user.firstName }}</td>
+              <td class="py-3 col-3">{{ user.lastName }}</td>
+              <td class="py-3 col-3">{{ user.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!errorMsg && !filteredUsers.length">
+          There are no Users.
+        </div>
+      </div>
     </div>
   </div>
 </div>

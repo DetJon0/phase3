@@ -340,3 +340,11 @@ span.disabled.ng-star-inserted:hover{
   color:white;
   cursor: not-allowed;
 }
+
+.cardButton{
+  width: fit-content;
+  margin: 0 auto !important;
+}
+.h-60{
+  height: 60px!important;
+}
