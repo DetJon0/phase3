@@ -65,6 +65,9 @@
   </div>
 
   <div class="py-3" *ngIf="!isLoading && !errorMessage && !this.rooms?.length">
-    <h6 class="text-center">No rooms available.</h6>
+    <h6 class="text-center">
+      No rooms available.To go back click
+      <a class="clickAble" (click)="goBack()">here</a>
+    </h6>
   </div>
 </div>

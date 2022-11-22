@@ -16,7 +16,10 @@
             [src]="'../../assets/photos/' + gh.img"
             class="w100 carousel-img"
           />
-          <div class="carousel-caption d-none d-md-block bg-custom">
+          <div
+            *ngIf="gh.name"
+            class="carousel-caption d-none d-md-block bg-custom"
+          >
             <h3>{{ gh.name | uppercase }}</h3>
             <p>{{ gh.description }}</p>
           </div>

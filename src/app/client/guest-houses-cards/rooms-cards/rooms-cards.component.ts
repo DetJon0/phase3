@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { faBed, faDollar, faStar } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { RoomsService } from 'src/app/guest-house/rooms.service';
@@ -34,7 +36,8 @@ export class RoomsCardsComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private adminRoomsService: RoomsService,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -84,5 +87,8 @@ export class RoomsCardsComponent implements OnInit {
     });
 
     this.modalRef.componentInstance.roomData = roomData;
+  }
+  goBack() {
+    this.location.back();
   }
 }

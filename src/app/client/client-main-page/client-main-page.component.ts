@@ -12,11 +12,11 @@ import { ghWithImg, UserService } from '../user.service';
 export class ClientMainPageComponent implements OnInit {
   guestHouses: ghWithImg[] = [];
   dummyData: ghWithImg[] = [
-    { id: 1, name: 'test1', description: 'test1 description', img: 'f1.jpg' },
-    { id: 2, name: 'test2', description: 'test2 description', img: 'f2.jpg' },
-    { id: 3, name: 'test3', description: 'test3 description', img: 'f3.jpg' },
-    { id: 4, name: 'test4', description: 'test4 description', img: 'f1.jpg' },
-    { id: 5, name: 'test5', description: 'test5 description', img: 'f2.jpg' },
+    { id: 1, name: '', description: '', img: 'f1.jpg' },
+    { id: 2, name: '', description: '', img: 'f2.jpg' },
+    { id: 3, name: '', description: '', img: 'f3.jpg' },
+    { id: 4, name: '', description: '', img: 'f1.jpg' },
+    { id: 5, name: '', description: '', img: 'f2.jpg' },
   ];
 
   searchRooms: FormGroup;
